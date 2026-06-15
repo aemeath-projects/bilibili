@@ -1,0 +1,123 @@
+{
+  "name": "@aemeath-projects/bilibili",
+  "version": "1.1.1",
+  "description": "Aemeath Bilibili SDK",
+  "type": "module",
+  "main": "./dist/main.js",
+  "types": "./dist/main.d.ts",
+  "files": [
+    "dist"
+  ],
+  "sideEffects": false,
+  "engines": {
+    "node": ">=22.12.0"
+  },
+  "packageManager": "pnpm@11.6.0",
+  "scripts": {
+    "build": "tsup",
+    "dev": "tsup --watch",
+    "lint": "eslint \"src/**/*.ts\" \"tests/**/*.ts\" \"*.ts\"",
+    "lint:fix": "eslint \"src/**/*.ts\" \"tests/**/*.ts\" \"*.ts\" --fix",
+    "format": "prettier --check \"src/**/*.ts\" \"tests/**/*.ts\"",
+    "format:fix": "prettier --write \"src/**/*.ts\" \"tests/**/*.ts\"",
+    "type-check": "tsc --noEmit",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "test:coverage": "vitest run --coverage",
+    "bump": "commit-and-tag-version",
+    "bump:patch": "commit-and-tag-version --release-as patch",
+    "bump:minor": "commit-and-tag-version --release-as minor",
+    "bump:major": "commit-and-tag-version --release-as major",
+    "changelog": "commit-and-tag-version --skip.bump --skip.commit --skip.tag",
+    "commit": "cz",
+    "prepublishOnly": "pnpm lint && pnpm type-check && pnpm run test && pnpm run build",
+    "prepare": "husky"
+  },
+  "keywords": [
+    "sdk"
+  ],
+  "author": "Aemeath Projects",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/aemeath-projects/napcat.git"
+  },
+  "bugs": {
+    "url": "https://github.com/aemeath-projects/napcat/issues"
+  },
+  "homepage": "https://aemeath.dev",
+  "config": {
+    "commitizen": {
+      "path": "cz-conventional-changelog"
+    }
+  },
+  "lint-staged": {
+    "src/**/*.ts": [
+      "eslint --fix",
+      "prettier --write"
+    ],
+    "tests/**/*.ts": [
+      "eslint --fix",
+      "prettier --write"
+    ]
+  },
+  "exports": {
+    ".": {
+      "types": "./dist/main.d.ts",
+      "import": "./dist/main.js"
+    },
+    "./core": {
+      "types": "./dist/core/index.d.ts",
+      "import": "./dist/core/index.js"
+    },
+    "./transport": {
+      "types": "./dist/transport/index.d.ts",
+      "import": "./dist/transport/index.js"
+    },
+    "./transport/*": {
+      "types": "./dist/transport/*.d.ts",
+      "import": "./dist/transport/*.js"
+    },
+    "./api": {
+      "types": "./dist/api/index.d.ts",
+      "import": "./dist/api/index.js"
+    },
+    "./api/*": {
+      "types": "./dist/api/*.d.ts",
+      "import": "./dist/api/*.js"
+    },
+    "./types": {
+      "types": "./dist/types/index.d.ts",
+      "import": "./dist/types/index.js"
+    },
+    "./utils": {
+      "types": "./dist/utils/index.d.ts",
+      "import": "./dist/utils/index.js"
+    }
+  },
+  "devDependencies": {
+    "@commitlint/cli": "^21.0.2",
+    "@commitlint/config-conventional": "^21.0.2",
+    "@eslint/js": "^10.0.1",
+    "@types/node": "^25.9.3",
+    "@types/ws": "^8.18.1",
+    "@vitest/coverage-v8": "^4.1.8",
+    "commit-and-tag-version": "^12.7.3",
+    "commitizen": "^4.3.2",
+    "cz-conventional-changelog": "^3.3.0",
+    "eslint": "^10.5.0",
+    "eslint-config-prettier": "^10.1.8",
+    "eslint-plugin-import-x": "^4.16.2",
+    "husky": "^9.1.7",
+    "lint-staged": "^17.0.7",
+    "prettier": "^3.8.4",
+    "tsup": "^8.5.1",
+    "typescript": "^6.0.3",
+    "typescript-eslint": "^8.61.0",
+    "vitest": "^4.1.8"
+  },
+  "dependencies": {
+    "axios": "^1.17.0",
+    "ws": "^8.21.0"
+  }
+}
