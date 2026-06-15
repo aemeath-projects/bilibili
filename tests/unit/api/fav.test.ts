@@ -3,7 +3,7 @@
  */
 import { describe, expect, it, vi, afterEach } from 'vitest'
 
-$api_text
+import { getFavList, getFavInfo, getFavContent, addFavVideo } from '../../../src/api/fav'
 import type { BiliClient } from '../../../src/transport'
 
 const mockGet = vi.fn()

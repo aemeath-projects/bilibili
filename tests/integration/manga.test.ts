@@ -5,7 +5,7 @@
  */
 import { expect } from 'vitest'
 
-import { getMangaDetail, getMangaDailyUpdate } from '../../src/api/manga/index.js'
+import { getMangaDetail, getMangaDailyUpdate } from '../../src/api/manga'
 
 import { createCookieClient, describeIf, expectApiSuccess } from './helpers.js'
 

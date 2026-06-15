@@ -3,7 +3,7 @@
  */
 import { expect } from 'vitest'
 
-import { getHistory, getToViewList, addToView, removeToView } from '../../src/api/history/index.js'
+import { getHistory, getToViewList, addToView, removeToView } from '../../src/api/history'
 
 import { createCookieClient, TEST_VIDEO_AID, describeIf, expectApiSuccess } from './helpers.js'
 

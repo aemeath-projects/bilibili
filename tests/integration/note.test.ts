@@ -3,7 +3,7 @@
  */
 import { describe, expect } from 'vitest'
 
-import { getNoteDetail, getVideoPublicNotes } from '../../src/api/note/index.js'
+import { getNoteDetail, getVideoPublicNotes } from '../../src/api/note'
 
 import {
   createAnonymousClient,
@@ -34,7 +34,7 @@ describeIf('BILIBILI_SESSDATA')('Note API — 需登录', () => {
   it('getPrivateNoteDetail 返回私有笔记', async () => {
     if (!authed) return
     const res = await expectApiSuccess(() =>
-      import('../../src/api/note/index.js').then((m) =>
+      import('../../src/api/note').then((m) =>
         m.getPrivateNoteDetail(authed, { oid: TEST_VIDEO_AID, oidType: 1, noteId: 0 }),
       ),
     )

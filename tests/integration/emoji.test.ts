@@ -3,12 +3,7 @@
  */
 import { describe, expect } from 'vitest'
 
-import {
-  getEmojiList,
-  getAllEmojis,
-  getEmojiDetail,
-  addEmojiPackage,
-} from '../../src/api/emoji/index.js'
+import { getEmojiList, getAllEmojis, getEmojiDetail, addEmojiPackage } from '../../src/api'
 
 import {
   createAnonymousClient,

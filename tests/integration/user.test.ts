@@ -3,8 +3,13 @@
  */
 import { describe, expect } from 'vitest'
 
-import { followUser, unfollowUser } from '../../src/api/user/action.js'
-import { getUserInfo, getUserStat, getUserRelation } from '../../src/api/user/index.js'
+import {
+  followUser,
+  unfollowUser,
+  getUserInfo,
+  getUserStat,
+  getUserRelation,
+} from '../../src/api/user'
 
 import {
   createAnonymousClient,

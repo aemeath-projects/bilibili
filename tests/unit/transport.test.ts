@@ -1,8 +1,7 @@
 import axios from 'axios'
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
 
-import { Credential } from '../../src/core/credential.js'
-import { BiliApiError } from '../../src/core/errors.js'
+import { Credential, BiliApiError } from '../../src/core'
 import { BiliClient, createClient } from '../../src/transport'
 
 // Mock axios

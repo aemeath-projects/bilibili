@@ -5,8 +5,13 @@
  */
 import { expect } from 'vitest'
 
-import { sendComment, deleteComment, likeComment } from '../../src/api/comment/action.js'
-import { getComments, getCommentReplies } from '../../src/api/comment/index.js'
+import {
+  sendComment,
+  deleteComment,
+  likeComment,
+  getComments,
+  getCommentReplies,
+} from '../../src/api/comment'
 
 import {
   createAnonymousClient,

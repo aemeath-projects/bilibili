@@ -3,12 +3,7 @@
  */
 import { describe, expect } from 'vitest'
 
-import {
-  getBlockedList,
-  getBlockedDetail,
-  getJuryCase,
-  juryVote,
-} from '../../src/api/blackroom/index.js'
+import { getBlockedList, getBlockedDetail, getJuryCase, juryVote } from '../../src/api/blackroom'
 
 import {
   createAnonymousClient,

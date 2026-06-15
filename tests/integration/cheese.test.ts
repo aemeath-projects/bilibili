@@ -3,7 +3,7 @@
  */
 import { expect } from 'vitest'
 
-import { getCheeseMeta, getCheeseList } from '../../src/api/cheese/index.js'
+import { getCheeseMeta, getCheeseList } from '../../src/api/cheese'
 
 import { createAnonymousClient, describeIf, expectApiSuccess } from './helpers.js'
 

@@ -3,7 +3,7 @@
  */
 import { describe, expect } from 'vitest'
 
-import { getLiveRoomInfo, getLiveStreamUrl, getLiveAreaList } from '../../src/api/live/index.js'
+import { getLiveRoomInfo, getLiveStreamUrl, getLiveAreaList } from '../../src/api/live'
 
 import {
   createAnonymousClient,

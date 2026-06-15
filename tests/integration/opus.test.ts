@@ -3,7 +3,7 @@
  */
 import { describe, expect } from 'vitest'
 
-import { getOpusDetail } from '../../src/api/opus/index.js'
+import { getOpusDetail } from '../../src/api/opus'
 
 import { createAnonymousClient, expectApiSuccess } from './helpers.js'
 

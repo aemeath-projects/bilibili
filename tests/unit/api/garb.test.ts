@@ -3,7 +3,7 @@
  */
 import { describe, expect, it, vi, afterEach } from 'vitest'
 
-$api_text
+import { searchGarb, getGarbList, getDlcBasic, getGarbDetail } from '../../../src/api/garb'
 import type { BiliClient } from '../../../src/transport'
 
 const mockGet = vi.fn()

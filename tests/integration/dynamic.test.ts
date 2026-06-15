@@ -3,7 +3,7 @@
  */
 import { expect } from 'vitest'
 
-import { getDynamicList, getSpaceDynamic, getDynamicDetail } from '../../src/api/dynamic/index.js'
+import { getDynamicList, getSpaceDynamic, getDynamicDetail } from '../../src/api/dynamic'
 
 import { createCookieClient, describeIf, expectApiSuccess } from './helpers.js'
 

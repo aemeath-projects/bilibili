@@ -6,7 +6,7 @@
  */
 import { expect } from 'vitest'
 
-import { search, searchSuggest, getHotSearch } from '../../src/api/search/index.js'
+import { search, searchSuggest, getHotSearch } from '../../src/api/search'
 
 import { createAnonymousClient, describeIf, expectApiSuccess } from './helpers.js'
 

@@ -1,16 +1,17 @@
 import { describe, expect, it } from 'vitest'
 
-import { Config, DEFAULT_CONFIG } from '../../src/core/config.js'
-import { Credential } from '../../src/core/credential.js'
-import { BiliApiError } from '../../src/core/errors.js'
 import {
   APP_KEY_MAP,
   appsign,
+  BiliApiError,
+  Config,
+  Credential,
+  DEFAULT_CONFIG,
   genTicketParams,
   hmacSha256,
   md5,
   WbiSigner,
-} from '../../src/core/sign.js'
+} from '../../src/core'
 
 // ---- Credential ----
 

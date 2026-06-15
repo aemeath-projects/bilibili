@@ -3,7 +3,7 @@
  */
 import { describe, expect, it, vi, afterEach } from 'vitest'
 
-$api_text
+import { getEmojiList, getAllEmojis, getEmojiDetail, addEmojiPackage } from '../../../src/api/emoji'
 import type { BiliClient } from '../../../src/transport'
 
 const mockGet = vi.fn()

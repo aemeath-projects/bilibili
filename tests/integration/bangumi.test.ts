@@ -8,7 +8,7 @@ import {
   getBangumiTimeline,
   getBangumiSeasonIndex,
   getBangumiRecommend,
-} from '../../src/api/bangumi/index.js'
+} from '../../src/api/bangumi'
 
 import {
   createAnonymousClient,

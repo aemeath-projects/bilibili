@@ -3,7 +3,7 @@
  */
 import { describe, expect } from 'vitest'
 
-import { getFavList, getFavInfo, getFavContent, addFavVideo } from '../../src/api/fav/index.js'
+import { getFavList, getFavInfo, getFavContent, addFavVideo } from '../../src/api/fav'
 
 import {
   createAnonymousClient,

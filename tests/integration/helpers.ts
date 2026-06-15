@@ -2,10 +2,9 @@
  * 集成测试工具函数
  */
 
-import type { ConfigOptions } from '../../src/core/config.js'
-import { Credential } from '../../src/core/credential.js'
-import { BiliApiError } from '../../src/core/errors.js'
-import { createClient, type BiliClient } from '../../src/transport/index.js'
+import type { ConfigOptions } from '../../src/core'
+import { Credential, BiliApiError } from '../../src/core'
+import { createClient, type BiliClient } from '../../src/transport'
 
 // ---- 环境变量读取 ----
 

@@ -8,7 +8,7 @@ import {
   getUnreadCount,
   getLikeNotifications,
   getReplyNotifications,
-} from '../../src/api/message/index.js'
+} from '../../src/api/message'
 
 import { createCookieClient, describeIf, expectApiSuccess } from './helpers.js'
 

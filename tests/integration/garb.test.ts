@@ -3,7 +3,7 @@
  */
 import { describe, expect } from 'vitest'
 
-import { searchGarb, getGarbList, getDlcBasic, getGarbDetail } from '../../src/api/garb/index.js'
+import { searchGarb, getGarbList, getDlcBasic, getGarbDetail } from '../../src/api/garb'
 
 import { createAnonymousClient, expectApiSuccess } from './helpers.js'
 

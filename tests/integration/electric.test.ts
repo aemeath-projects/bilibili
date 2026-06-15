@@ -3,7 +3,7 @@
  */
 import { expect } from 'vitest'
 
-import { getElectricList, getBCoinBalance } from '../../src/api/electric/index.js'
+import { getElectricList, getBCoinBalance } from '../../src/api/electric'
 
 import { createCookieClient, describeIf, expectApiSuccess } from './helpers.js'
 

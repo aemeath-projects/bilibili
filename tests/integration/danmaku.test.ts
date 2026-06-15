@@ -3,7 +3,7 @@
  */
 import { describe, expect } from 'vitest'
 
-import { getDanmaku, getDanmakuView, sendDanmaku } from '../../src/api/danmaku/index.js'
+import { getDanmaku, getDanmakuView, sendDanmaku } from '../../src/api/danmaku'
 
 import {
   createAnonymousClient,
@@ -33,7 +33,7 @@ describe('Danmaku API — 公开数据', () => {
 describeIf('BILIBILI_SESSDATA')('Danmaku API — 需登录', () => {
   it('sendDanmaku 发送弹幕', async () => {
     // 需要知道视频的 oid (cid) 和 bvid
-    const { getVideoPages } = await import('../../src/api/video/info.js')
+    const { getVideoPages } = await import('../../src/api/video')
     const pages = await getVideoPages(authed!, { aid: TEST_VIDEO_AID })
     const cid = (pages.data as { cid: number }[])?.[0]?.cid
     if (!cid) return

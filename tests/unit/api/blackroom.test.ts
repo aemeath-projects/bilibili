@@ -3,7 +3,7 @@
  */
 import { describe, expect, it, vi, afterEach } from 'vitest'
 
-$api_text
+import { getBlockedList, getBlockedDetail, getJuryCase, juryVote } from '../../../src/api/blackroom'
 import type { BiliClient } from '../../../src/transport'
 
 const mockGet = vi.fn()

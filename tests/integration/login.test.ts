@@ -3,8 +3,13 @@
  */
 import { expect } from 'vitest'
 
-import { getQrCodeTv, pollQrCodeTv, getAccountInfoTv } from '../../src/api/login/tv.js'
-import { getQrCodeUrl, pollQrCode } from '../../src/api/login/web.js'
+import {
+  getQrCodeTv,
+  pollQrCodeTv,
+  getAccountInfoTv,
+  getQrCodeUrl,
+  pollQrCode,
+} from '../../src/api/login'
 
 import {
   createAnonymousClient,
@@ -19,14 +24,14 @@ describeIf('BILIBILI_SESSDATA')('Login Web API', () => {
   const authed = createCookieClient()!
 
   it('getLoginStatus 返回登录用户信息', async () => {
-    const { getLoginStatus } = await import('../../src/api/login/web.js')
+    const { getLoginStatus } = await import('../../src/api/login')
     const res = await getLoginStatus(authed)
     expect(res.code).toBe(0)
     expect((res.data as Record<string, unknown>)?.mid).toBeGreaterThan(0)
   })
 
   it('refreshCookie 返回刷新信息', async () => {
-    const { refreshCookie } = await import('../../src/api/login/web.js')
+    const { refreshCookie } = await import('../../src/api/login')
     const refreshToken = process.env.BILIBILI_REFRESH_TOKEN
     if (!refreshToken) return
     const res = await refreshCookie(authed, refreshToken)

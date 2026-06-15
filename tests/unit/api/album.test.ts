@@ -3,7 +3,7 @@
  */
 import { describe, expect, it, vi, afterEach } from 'vitest'
 
-$api_text
+import { getAlbumInfo, getAlbumListByUser } from '../../../src/api/album'
 import type { BiliClient } from '../../../src/transport'
 
 const mockGet = vi.fn()
