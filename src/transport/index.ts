@@ -8,14 +8,12 @@
 
 import axios, { type AxiosInstance, type AxiosRequestConfig } from 'axios'
 
-import type { Config, ConfigOptions } from '../core/config.js'
+import type { Config, ConfigOptions, Credential, WbiSigner } from '../core'
+import { appsign, BiliApiError } from '../core'
 import { Config as ConfigImpl } from '../core/config.js'
-import type { Credential } from '../core/credential.js'
-import { BiliApiError } from '../core/errors.js'
-import { appsign, type WbiSigner } from '../core/sign.js'
 import type { AuthMode, BiliApiResponse } from '../types'
 
-// ---- 默认请求头 ----
+// 默认请求头
 
 const DEFAULT_HEADERS: Record<string, string> = {
   'User-Agent': 'Mozilla/5.0 BiliDroid/1.12.0 (bbcallen@gmail.com)',
@@ -24,7 +22,7 @@ const DEFAULT_HEADERS: Record<string, string> = {
   'Accept-Language': 'zh-CN,zh;q=0.9,en;q=0.8',
 }
 
-// ---- BiliClient ----
+// BiliClient
 
 export interface BiliClientOptions {
   /** SDK 配置 */

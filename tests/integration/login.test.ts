@@ -9,7 +9,7 @@ import {
   getAccountInfoTv,
   getQrCodeUrl,
   pollQrCode,
-} from '../../src/api/login'
+} from '../../src/api'
 
 import {
   createAnonymousClient,

@@ -3,12 +3,7 @@
  */
 import { describe, expect, it, vi, afterEach } from 'vitest'
 
-import {
-  getDynamicList,
-  getSpaceDynamic,
-  getDynamicDetail,
-  likeDynamic,
-} from '../../../src/api/dynamic'
+import { getDynamicList, getSpaceDynamic, getDynamicDetail, likeDynamic } from '../../../src/api'
 import type { BiliClient } from '../../../src/transport'
 
 const mockGet = vi.fn()

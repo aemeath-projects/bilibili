@@ -3,7 +3,7 @@
  */
 import { describe, expect, it, vi, afterEach } from 'vitest'
 
-import { getLiveRoomInfo, getLiveStreamUrl, getLiveAreaList } from '../../../src/api/live'
+import { getLiveRoomInfo, getLiveStreamUrl, getLiveAreaList } from '../../../src/api'
 import type { BiliClient } from '../../../src/transport'
 
 const mockGet = vi.fn()

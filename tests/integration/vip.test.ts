@@ -3,7 +3,7 @@
  */
 import { expect } from 'vitest'
 
-import { getVipInfo, vipClockIn, getVipCenter } from '../../src/api/vip'
+import { getVipInfo, vipClockIn, getVipCenter } from '../../src/api'
 
 import { createCookieClient, describeIf, expectApiSuccess } from './helpers.js'
 

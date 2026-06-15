@@ -9,7 +9,7 @@ import {
   getUserRelation,
   followUser,
   unfollowUser,
-} from '../../../src/api/user'
+} from '../../../src/api'
 import type { BiliClient } from '../../../src/transport'
 
 const mockGet = vi.fn()

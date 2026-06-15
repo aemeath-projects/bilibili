@@ -10,7 +10,7 @@ import {
   getUnreadCount,
   getLikeNotifications,
   getReplyNotifications,
-} from '../../../src/api/message'
+} from '../../../src/api'
 import type { BiliClient } from '../../../src/transport'
 
 const mockGet = vi.fn()

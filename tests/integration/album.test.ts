@@ -3,7 +3,7 @@
  */
 import { describe, expect } from 'vitest'
 
-import { getAlbumInfo, getAlbumListByUser } from '../../src/api/album'
+import { getAlbumInfo, getAlbumListByUser } from '../../src/api'
 
 import { createAnonymousClient, expectApiSuccess } from './helpers.js'
 

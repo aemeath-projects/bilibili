@@ -7,7 +7,7 @@
 import type { BiliClient } from '../../transport'
 import type { BiliApiResponse } from '../../types'
 
-// ---- Web 端登录 ----
+// Web 端登录
 
 /** 获取二维码登录 URL 和 auth_code */
 export async function getQrCodeUrl(

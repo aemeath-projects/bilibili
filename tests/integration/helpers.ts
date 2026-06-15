@@ -6,14 +6,14 @@ import type { ConfigOptions } from '../../src/core'
 import { Credential, BiliApiError } from '../../src/core'
 import { createClient, type BiliClient } from '../../src/transport'
 
-// ---- 环境变量读取 ----
+// 环境变量读取
 
 /** 安全读取环境变量，缺失时返回 undefined */
 function env(key: string): string | undefined {
   return process.env[key] ?? undefined
 }
 
-// ---- 客户端工厂 ----
+// 客户端工厂
 
 /** 创建匿名客户端（无凭据，适合公开接口） */
 export function createAnonymousClient(config?: ConfigOptions): BiliClient {
@@ -37,7 +37,7 @@ export function createCookieClient(config?: ConfigOptions): BiliClient | null {
   return createClient({ config, credential })
 }
 
-// ---- 条件测试辅助 ----
+// 条件测试辅助
 
 /**
  * 仅当存在指定环境变量时才执行测试块
@@ -48,21 +48,21 @@ export function createCookieClient(config?: ConfigOptions): BiliClient | null {
  * @example
  * describeIf('BILIBILI_SESSDATA')('登录相关', () => { ... })
  */
-export function itIf(envVar: string) {
+export function itIf(envVar: string): typeof it {
   return env(envVar) ? it : it.skip
 }
 
-export function describeIf(envVar: string) {
+export function describeIf(envVar: string): typeof describe {
   return env(envVar) ? describe : describe.skip
 }
 
-// ---- 导出公开测试数据 ----
+// 导出公开测试数据
 
 export const TEST_VIDEO_AID = Number(env('TEST_VIDEO_AID')) || 170001
 export const TEST_VIDEO_BVID = env('TEST_VIDEO_BVID') ?? 'BV17x411w7KC'
 export const TEST_USER_MID = Number(env('TEST_USER_MID')) || 0
 
-// ---- 网络容错 ----
+// 网络容错
 
 /**
  * 对公开 API 调用进行容错包装

@@ -5,7 +5,7 @@
 import type { BiliClient } from '../../transport'
 import type { BiliApiResponse } from '../../types'
 
-// ---- 参数 ----
+// 参数
 
 export interface GetDynamicParams {
   /** 页码 */
@@ -23,7 +23,7 @@ export interface GetSpaceDynamicParams {
   offset?: string
 }
 
-// ---- API 函数 ----
+// API 函数
 
 /** 获取动态列表（主页推荐） */
 export async function getDynamicList(

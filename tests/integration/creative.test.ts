@@ -8,7 +8,7 @@ import {
   getCreativeGraph,
   getCreativeNum,
   getCreativeFanOverview,
-} from '../../src/api/creative'
+} from '../../src/api'
 
 import { createCookieClient, describeIf, expectApiSuccess } from './helpers.js'
 

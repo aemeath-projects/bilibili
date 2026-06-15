@@ -3,7 +3,7 @@
  */
 import { describe, expect } from 'vitest'
 
-import { getAudioInfo, getAudioList, getAudioHomepageRecommend } from '../../src/api/audio'
+import { getAudioInfo, getAudioList, getAudioHomepageRecommend } from '../../src/api'
 
 import { createAnonymousClient, expectApiSuccess } from './helpers.js'
 

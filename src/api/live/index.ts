@@ -5,7 +5,7 @@
 import type { BiliClient } from '../../transport'
 import type { BiliApiResponse } from '../../types'
 
-// ---- 参数 ----
+// 参数
 
 export interface LiveRoomParam {
   roomId: number
@@ -15,7 +15,7 @@ export interface LiveAreaParam {
   parentId?: number
 }
 
-// ---- API 函数 ----
+// API 函数
 
 /** 获取直播间信息 */
 export async function getLiveRoomInfo(

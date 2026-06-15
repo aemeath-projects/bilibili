@@ -9,7 +9,7 @@ import {
   getAudioDownloadUrl,
   getAudioMenuInfo,
   getAudioHomepageRecommend,
-} from '../../../src/api/audio'
+} from '../../../src/api'
 import type { BiliClient } from '../../../src/transport'
 
 const mockGet = vi.fn()

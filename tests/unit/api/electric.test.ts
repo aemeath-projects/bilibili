@@ -3,7 +3,7 @@
  */
 import { describe, expect, it, vi, afterEach } from 'vitest'
 
-import { getElectricList, getBCoinBalance } from '../../../src/api/electric'
+import { getElectricList, getBCoinBalance } from '../../../src/api'
 import type { BiliClient } from '../../../src/transport'
 
 const mockGet = vi.fn()

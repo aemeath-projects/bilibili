@@ -17,7 +17,7 @@ import {
   likeVideo,
   coinVideo,
   tripleVideo,
-} from '../../../src/api/video'
+} from '../../../src/api'
 import type { BiliClient } from '../../../src/transport'
 
 // Mock BiliClient

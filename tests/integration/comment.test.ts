@@ -11,7 +11,7 @@ import {
   likeComment,
   getComments,
   getCommentReplies,
-} from '../../src/api/comment'
+} from '../../src/api'
 
 import {
   createAnonymousClient,

@@ -5,7 +5,7 @@
  */
 import { describe, expect } from 'vitest'
 
-import { getSeniorCategory, getSeniorQuestion, getSeniorResult } from '../../src/api/senior'
+import { getSeniorCategory, getSeniorQuestion, getSeniorResult } from '../../src/api'
 
 import { createAnonymousClient, expectApiSuccess } from './helpers.js'
 

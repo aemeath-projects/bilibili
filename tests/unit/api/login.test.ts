@@ -12,7 +12,7 @@ import {
   getQrCodeTv,
   pollQrCodeTv,
   getAccountInfoTv,
-} from '../../../src/api/login'
+} from '../../../src/api'
 import type { BiliClient } from '../../../src/transport'
 
 const mockGet = vi.fn()

@@ -3,7 +3,7 @@
  */
 import { describe, expect } from 'vitest'
 
-import { getNoteDetail, getVideoPublicNotes } from '../../src/api/note'
+import { getNoteDetail, getVideoPublicNotes } from '../../src/api'
 
 import {
   createAnonymousClient,

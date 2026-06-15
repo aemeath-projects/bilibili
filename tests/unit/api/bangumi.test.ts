@@ -8,7 +8,7 @@ import {
   getBangumiTimeline,
   getBangumiSeasonIndex,
   getBangumiRecommend,
-} from '../../../src/api/bangumi'
+} from '../../../src/api'
 import type { BiliClient } from '../../../src/transport'
 
 const mockGet = vi.fn()

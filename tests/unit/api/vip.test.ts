@@ -3,7 +3,7 @@
  */
 import { describe, expect, it, vi, afterEach } from 'vitest'
 
-import { getVipInfo, vipClockIn, getVipCenter } from '../../../src/api/vip'
+import { getVipInfo, vipClockIn, getVipCenter } from '../../../src/api'
 import type { BiliClient } from '../../../src/transport'
 
 const mockGet = vi.fn()

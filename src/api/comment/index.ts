@@ -5,7 +5,7 @@
 import type { BiliClient } from '../../transport'
 import type { BiliApiResponse } from '../../types'
 
-// ---- 参数 ----
+// 参数
 
 export interface GetCommentsParams {
   /** 目标 ID（视频 av、动态 id 等） */
@@ -18,7 +18,7 @@ export interface GetCommentsParams {
   sort?: number
 }
 
-// ---- API 函数 ----
+// API 函数
 
 /** 获取评论列表 */
 export async function getComments(

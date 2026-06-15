@@ -3,7 +3,7 @@
  */
 import { describe, expect } from 'vitest'
 
-import { getArticleInfo, getArticlesByUser, getArticleCategories } from '../../src/api/article'
+import { getArticleInfo, getArticlesByUser, getArticleCategories } from '../../src/api'
 
 import {
   createAnonymousClient,

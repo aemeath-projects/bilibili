@@ -5,7 +5,7 @@
 import type { BiliClient } from '../../transport'
 import type { BiliApiResponse } from '../../types'
 
-// ---- 参数 ----
+// 参数
 
 export interface SearchParams {
   keyword: string
@@ -21,7 +21,7 @@ export interface SuggestParams {
   term: string
 }
 
-// ---- API 函数 ----
+// API 函数
 
 /** 搜索 */
 export async function search(client: BiliClient, params: SearchParams): Promise<BiliApiResponse> {

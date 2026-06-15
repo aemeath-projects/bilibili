@@ -5,13 +5,13 @@
 import type { BiliClient } from '../../transport'
 import type { BiliApiResponse, BiliOfficial, BiliVip } from '../../types'
 
-// ---- 参数 ----
+// 参数
 
 export interface UserMidParam {
   mid: number
 }
 
-// ---- 响应类型 ----
+// 响应类型
 
 /** 用户空间详细信息 */
 export interface UserInfoData {
@@ -54,7 +54,7 @@ export interface UserRelationData {
   follower: number
 }
 
-// ---- API 函数 ----
+// API 函数
 
 /** 获取用户空间详细信息（wbi 签名） */
 export async function getUserInfo(

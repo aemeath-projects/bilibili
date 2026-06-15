@@ -5,7 +5,7 @@
 import type { BiliClient } from '../../transport'
 import type { BiliApiResponse } from '../../types'
 
-// ---- API 函数 ----
+// API 函数
 
 /** 获取文章信息 */
 export async function getArticleInfo(

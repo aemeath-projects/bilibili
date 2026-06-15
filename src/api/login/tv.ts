@@ -7,7 +7,7 @@
 import type { BiliClient } from '../../transport'
 import type { BiliApiResponse } from '../../types'
 
-// ---- TV 端扫码登录 ----
+// TV 端扫码登录
 
 /** TV 端获取二维码 auth_code */
 export async function getQrCodeTv(

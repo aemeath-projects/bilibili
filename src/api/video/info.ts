@@ -5,14 +5,14 @@
 import type { BiliClient } from '../../transport'
 import type { BiliApiResponse, BiliVideoPage, BiliVideoStat } from '../../types'
 
-// ---- 参数类型 ----
+// 参数类型
 
 export interface VideoIdParam {
   aid?: number
   bvid?: string
 }
 
-// ---- 响应数据类型 ----
+// 响应数据类型
 
 /** 视频详细信息 */
 export interface VideoInfoData {
@@ -38,7 +38,7 @@ export interface VideoInfoData {
   }
 }
 
-// ---- 工具 ----
+// 工具
 
 /** 将参数对象转为 Record<string, string> */
 function vidParams(params: VideoIdParam): Record<string, string> {
@@ -48,7 +48,7 @@ function vidParams(params: VideoIdParam): Record<string, string> {
   return result
 }
 
-// ---- API 函数 ----
+// API 函数
 
 /** 获取视频状态数（简化版） */
 export async function getVideoStat(

@@ -5,6 +5,8 @@
  * 也兼容「薄封装」模式：通过 Credential.fromCookie() 从 cookie 字符串解析
  */
 
+import { parseCookie } from '../utils'
+
 /** 厚封装构造参数 */
 export interface CredentialFields {
   /** Cookie SESSDATA */
@@ -47,7 +49,7 @@ export class Credential {
    * 示例: "SESSDATA=xxx; bili_jct=yyy; DedeUserID=123"
    */
   static fromCookie(cookieStr: string): Credential {
-    const parsed = parseCookieString(cookieStr)
+    const parsed = parseCookie(cookieStr)
     return new Credential({
       sessdata: parsed.SESSDATA,
       biliJct: parsed.bili_jct,
@@ -92,20 +94,4 @@ export class Credential {
   get hasAccessToken(): boolean {
     return !!this.accessToken
   }
-}
-
-/**
- * 解析 cookie 字符串为键值对
- * "SESSDATA=xxx; bili_jct=yyy" => { SESSDATA: "xxx", bili_jct: "yyy" }
- */
-function parseCookieString(cookieStr: string): Record<string, string> {
-  const result: Record<string, string> = {}
-  for (const part of cookieStr.split(';')) {
-    const eqIdx = part.indexOf('=')
-    if (eqIdx === -1) continue
-    const key = part.slice(0, eqIdx).trim()
-    const value = part.slice(eqIdx + 1).trim()
-    if (key) result[key] = value
-  }
-  return result
 }

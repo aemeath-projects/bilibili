@@ -2,7 +2,7 @@ import { describe, expect, it } from 'vitest'
 
 import { aid2bvid, bvid2aid, formatImageUrl, parseCookie, hmacSha256, md5 } from '../../src/utils'
 
-// ---- AV/BV 互转 ----
+// AV/BV 互转
 
 describe('aid2bvid / bvid2aid', () => {
   it('aid2bvid → bvid2aid 往返一致性 (1-5000)', () => {
@@ -44,7 +44,7 @@ describe('aid2bvid / bvid2aid', () => {
   })
 })
 
-// ---- 图片 URL 格式化 ----
+// 图片 URL 格式化
 
 describe('formatImageUrl', () => {
   const baseUrl = 'https://i0.hdslb.com/bfs/archive/abc123.jpg'
@@ -97,7 +97,7 @@ describe('formatImageUrl', () => {
   })
 })
 
-// ---- Cookie 解析 ----
+// Cookie 解析
 
 describe('parseCookie', () => {
   it('解析标准 cookie 字符串', () => {
@@ -135,7 +135,7 @@ describe('parseCookie', () => {
   })
 })
 
-// ---- 重导出的哈希函数 ----
+// 重导出的哈希函数
 
 describe('重导出 hmacSha256 / md5', () => {
   it('md5 计算结果正确', () => {

@@ -3,7 +3,7 @@
  */
 import { describe, expect } from 'vitest'
 
-import { getDanmaku, getDanmakuView, sendDanmaku } from '../../src/api/danmaku'
+import { getDanmaku, getDanmakuView, sendDanmaku } from '../../src/api'
 
 import {
   createAnonymousClient,

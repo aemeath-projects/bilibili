@@ -3,7 +3,7 @@
  */
 import { describe, expect, it, vi, afterEach } from 'vitest'
 
-import { search, searchSuggest, getHotSearch } from '../../../src/api/search'
+import { search, searchSuggest, getHotSearch } from '../../../src/api'
 import type { BiliClient } from '../../../src/transport'
 
 const mockGet = vi.fn()

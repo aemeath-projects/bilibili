@@ -8,7 +8,7 @@ import {
   getMangaEpisode,
   getMangaEpisodeImages,
   getMangaDailyUpdate,
-} from '../../../src/api/manga'
+} from '../../../src/api'
 import type { BiliClient } from '../../../src/transport'
 
 const mockPost = vi.fn()

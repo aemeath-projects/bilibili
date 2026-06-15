@@ -13,7 +13,7 @@ import {
   WbiSigner,
 } from '../../src/core'
 
-// ---- Credential ----
+// Credential
 
 describe('Credential', () => {
   it('厚封装构造 — 所有字段', () => {
@@ -127,7 +127,7 @@ describe('Credential', () => {
   })
 })
 
-// ---- Config ----
+// Config
 
 describe('Config', () => {
   it('默认值', () => {
@@ -168,7 +168,7 @@ describe('Config', () => {
   })
 })
 
-// ---- Sign ----
+// Sign
 
 describe('md5', () => {
   it('计算 MD5 哈希（小写 hex）', () => {
@@ -318,7 +318,7 @@ describe('genTicketParams', () => {
   })
 })
 
-// ---- BiliApiError ----
+// BiliApiError
 
 describe('BiliApiError', () => {
   it('包含 code / message / rawResponse', () => {

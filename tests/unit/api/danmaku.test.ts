@@ -10,7 +10,7 @@ import {
   getDanmakuSnapshot,
   sendDanmaku,
   likeDanmaku,
-} from '../../../src/api/danmaku'
+} from '../../../src/api'
 import type { BiliClient } from '../../../src/transport'
 
 const mockGet = vi.fn()

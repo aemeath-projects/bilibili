@@ -25,7 +25,7 @@ const __dirname = dirname(fileURLToPath(import.meta.url))
 const PROJECT_ROOT = resolve(__dirname, '..')
 const ENV_PATH = resolve(PROJECT_ROOT, '.env')
 
-// ---- 帮助 ----
+// 帮助
 
 if (process.argv.includes('--help') || process.argv.includes('-h')) {
   console.log(`
@@ -47,7 +47,7 @@ Bilibili QR 码登录脚本
 
 const SHOULD_WRITE = process.argv.includes('--write')
 
-// ---- 工具 ----
+// 工具
 
 const sleep = (ms: number) => new Promise((r) => setTimeout(r, ms))
 
@@ -69,7 +69,7 @@ function timestamp(): string {
   return new Date().toLocaleTimeString('zh-CN', { hour12: false })
 }
 
-// ---- 主流程 ----
+// 主流程
 
 async function login(): Promise<void> {
   console.log('')

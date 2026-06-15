@@ -8,7 +8,7 @@ import {
   getCreativeGraph,
   getCreativeNum,
   getCreativeFanOverview,
-} from '../../../src/api/creative'
+} from '../../../src/api'
 import type { BiliClient } from '../../../src/transport'
 
 const mockGet = vi.fn()

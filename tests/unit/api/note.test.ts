@@ -3,7 +3,7 @@
  */
 import { describe, expect, it, vi, afterEach } from 'vitest'
 
-import { getNoteDetail, getPrivateNoteDetail, getVideoPublicNotes } from '../../../src/api/note'
+import { getNoteDetail, getPrivateNoteDetail, getVideoPublicNotes } from '../../../src/api'
 import type { BiliClient } from '../../../src/transport'
 
 const mockGet = vi.fn()

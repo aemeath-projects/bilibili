@@ -10,7 +10,7 @@ import {
   getSeniorQuestion,
   submitSeniorAnswer,
   getSeniorResult,
-} from '../../../src/api/senior'
+} from '../../../src/api'
 import type { BiliClient } from '../../../src/transport'
 
 const mockGet = vi.fn()

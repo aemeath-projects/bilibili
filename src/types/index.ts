@@ -4,7 +4,7 @@
  * 包含 Bilibili API 通用的请求/响应结构和领域模型的基础类型
  */
 
-// ---- 通用响应 ----
+// 通用响应
 
 /** Bilibili API 统一响应结构 */
 export interface BiliApiResponse<T = unknown> {
@@ -24,12 +24,12 @@ export interface PaginationInfo {
   count: number
 }
 
-// ---- 鉴权 ----
+// 鉴权
 
 /** 鉴权模式 */
 export type AuthMode = 'none' | 'cookie' | 'app' | 'wbi'
 
-// ---- 通用子类型 ----
+// 通用子类型
 
 /** 用户基础信息（精简版） */
 export interface BiliSimpleUser {

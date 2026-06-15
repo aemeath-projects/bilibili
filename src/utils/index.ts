@@ -11,7 +11,7 @@
 // 从核心模块重导出
 export { hmacSha256, md5 } from '../core/sign.js'
 
-// ---- AV/BV 号互转 ----
+// AV/BV 号互转
 // 算法来源：https://www.zhihu.com/question/381784377/answer/1099438784
 
 /** BV 号编码表（58 进制） */
@@ -125,7 +125,7 @@ export function bvid2aid(bvid: string): number {
   return Number((tmp & BV_MASK) ^ BV_XOR)
 }
 
-// ---- 图片 URL 格式化 ----
+// 图片 URL 格式化
 
 /**
  * 格式化 Bilibili 图片 URL（添加 @ 后缀以控制尺寸/格式）
@@ -166,7 +166,7 @@ export function formatImageUrl(
   return `${baseUrl}@${suffix}.${fmt}`
 }
 
-// ---- Cookie 解析 ----
+// Cookie 解析
 
 /**
  * 解析 cookie 字符串为键值对

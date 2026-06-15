@@ -3,7 +3,7 @@
  */
 import { describe, expect, it, vi, afterEach } from 'vitest'
 
-import { getHistory, getToViewList, addToView, removeToView } from '../../../src/api/history'
+import { getHistory, getToViewList, addToView, removeToView } from '../../../src/api'
 import type { BiliClient } from '../../../src/transport'
 
 const mockGet = vi.fn()

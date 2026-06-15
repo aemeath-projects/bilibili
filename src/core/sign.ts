@@ -9,7 +9,7 @@
 
 import { createHash, createHmac } from 'crypto'
 
-// ---- 已知的 AppKey / AppSec 映射表 ----
+// 已知的 AppKey / AppSec 映射表
 
 /** 已知的 appkey -> appsec 映射 */
 export const APP_KEY_MAP: Record<string, string> = {
@@ -23,7 +23,7 @@ export const APP_KEY_MAP: Record<string, string> = {
   '4409e2ce8ffd6b70': '59b43e04ad6965f34319062b478f83dd',
 }
 
-// ---- 工具函数 ----
+// 工具函数
 
 /** MD5 哈希（hex 小写） */
 export function md5(input: string): string {
@@ -35,7 +35,7 @@ export function hmacSha256(key: string, message: string): string {
   return createHmac('sha256', key).update(message).digest('hex')
 }
 
-// ---- APP 签名 ----
+// APP 签名
 
 /**
  * APP API 签名算法
@@ -64,7 +64,7 @@ export function appsign(params: Record<string, string>, appkey: string, appsec: 
   params.sign = sign
 }
 
-// ---- WBI 签名 ----
+// WBI 签名
 
 /** WBI mixin_key 重排映射表 */
 const MIXIN_KEY_ENC_TAB: number[] = [
@@ -139,7 +139,7 @@ export class WbiSigner {
   }
 }
 
-// ---- bili_ticket ----
+// bili_ticket
 
 /**
  * 生成 bili_ticket 签名参数

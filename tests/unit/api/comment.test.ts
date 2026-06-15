@@ -9,7 +9,7 @@ import {
   sendComment,
   deleteComment,
   likeComment,
-} from '../../../src/api/comment'
+} from '../../../src/api'
 import type { BiliClient } from '../../../src/transport'
 
 const mockGet = vi.fn()
