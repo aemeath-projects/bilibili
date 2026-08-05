@@ -82,9 +82,9 @@ const MIXIN_KEY_ENC_TAB: number[] = [
  * 3. 调用 sign(params) 为参数追加 w_rid 和 wts
  */
 export class WbiSigner {
-  private imgKey = ''
-  private subKey = ''
-  private mixinKey = ''
+  private _imgKey = ''
+  private _subKey = ''
+  private _mixinKey = ''
 
   /**
    * 从 nav 接口的 wbi_img 数据初始化
@@ -107,18 +107,18 @@ export class WbiSigner {
    * 直接使用 img_key 和 sub_key 初始化
    */
   init(imgKey: string, subKey: string): void {
-    this.imgKey = imgKey
-    this.subKey = subKey
+    this._imgKey = imgKey
+    this._subKey = subKey
     const rawKey = imgKey + subKey
     // 按 MIXIN_KEY_ENC_TAB 重排，取前 32 位
-    this.mixinKey = MIXIN_KEY_ENC_TAB.map((i) => rawKey[i])
+    this._mixinKey = MIXIN_KEY_ENC_TAB.map((i) => rawKey[i])
       .join('')
       .slice(0, 32)
   }
 
   /** 是否已初始化 */
   get ready(): boolean {
-    return this.mixinKey.length === 32
+    return this._mixinKey.length === 32
   }
 
   /**
@@ -134,7 +134,7 @@ export class WbiSigner {
       .map((k) => `${encodeURIComponent(k)}=${encodeURIComponent(params[k])}`)
       .join('&')
 
-    const wRid = md5(query + this.mixinKey)
+    const wRid = md5(query + this._mixinKey)
     params.w_rid = wRid
   }
 }

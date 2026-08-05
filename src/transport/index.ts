@@ -97,10 +97,10 @@ export class BiliClient {
     auth: AuthMode = 'none',
     config?: AxiosRequestConfig,
   ): Promise<BiliApiResponse<T>> {
-    const query = this.applyAuth(params, auth)
+    const query = this._applyAuth(params, auth)
     const response = await this.axios.get<BiliApiResponse<T>>(url, {
       params: query,
-      headers: this.buildHeaders(auth),
+      headers: this._buildHeaders(auth),
       ...config,
     })
     return response.data
@@ -115,16 +115,16 @@ export class BiliClient {
     auth: AuthMode = 'none',
     config?: AxiosRequestConfig,
   ): Promise<BiliApiResponse<T>> {
-    const body = this.applyAuth(data, auth)
+    const body = this._applyAuth(data, auth)
     const response = await this.axios.post<BiliApiResponse<T>>(url, body, {
-      headers: this.buildHeaders(auth),
+      headers: this._buildHeaders(auth),
       ...config,
     })
     return response.data
   }
 
   /** 注入鉴权参数 */
-  private applyAuth(params: Record<string, string>, auth: AuthMode): Record<string, string> {
+  private _applyAuth(params: Record<string, string>, auth: AuthMode): Record<string, string> {
     const result = { ...params }
 
     if (auth === 'app' && this.appKey && this.appSec) {
@@ -143,7 +143,7 @@ export class BiliClient {
   }
 
   /** 构建请求头 */
-  private buildHeaders(auth: AuthMode): Record<string, string> {
+  private _buildHeaders(auth: AuthMode): Record<string, string> {
     const headers: Record<string, string> = {}
 
     if (!this.credential) return headers
