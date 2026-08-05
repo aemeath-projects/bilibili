@@ -150,6 +150,7 @@ vite.config.ts.timestamp-*
 
 # Claude Code
 .claude/
+.playwright-mcp/
 .serena/
 .spec-workflow/
 

@@ -3,7 +3,7 @@
  */
 import { describe, expect } from 'vitest'
 
-import { getDanmaku, getDanmakuView, sendDanmaku } from '../../src/api'
+import { getDanmaku, getDanmakuView, getDanmakuSnapshot, sendDanmaku } from '../../src/api'
 
 import {
   createAnonymousClient,
@@ -27,6 +27,13 @@ describe('Danmaku API — 公开数据', () => {
     const res = await expectApiSuccess(() => getDanmakuView(client, 12345))
     if (!res) return
     expect(res).toBeDefined()
+  })
+
+  it('getDanmakuSnapshot 返回弹幕快照', async () => {
+    const res = await expectApiSuccess(() => getDanmakuSnapshot(client, TEST_VIDEO_AID))
+    if (!res) return
+    expect(res.code).toBe(0)
+    expect(Array.isArray(res.data)).toBe(true)
   })
 })
 

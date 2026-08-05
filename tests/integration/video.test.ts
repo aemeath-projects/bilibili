@@ -7,7 +7,14 @@
 
 import { describe, expect, it } from 'vitest'
 
-import { getVideoStat, getVideoInfo, getVideoPages } from '../../src/api'
+import {
+  getVideoStat,
+  getVideoInfo,
+  getVideoPages,
+  getRelatedVideos,
+  getVideoTags,
+  getVideoSnapshot,
+} from '../../src/api'
 
 import {
   createAnonymousClient,
@@ -57,6 +64,31 @@ describe('Video API — 公开数据', () => {
       expect(typeof page.part).toBe('string')
       expect(page.duration).toBeGreaterThan(0)
     }
+  })
+
+  it('getRelatedVideos 返回关联视频', async () => {
+    const res = await expectApiSuccess(() => getRelatedVideos(client, { aid: TEST_VIDEO_AID }))
+    if (!res) return
+    expect(res.code).toBe(0)
+    expect(Array.isArray(res.data)).toBe(true)
+  })
+
+  it('getVideoTags 返回视频标签', async () => {
+    const res = await expectApiSuccess(() => getVideoTags(client, { aid: TEST_VIDEO_AID }))
+    if (!res) return
+    expect(res.code).toBe(0)
+    expect(Array.isArray(res.data)).toBe(true)
+  })
+
+  it('getVideoSnapshot 返回视频快照', async () => {
+    // 需要先获取视频 cid
+    const pages = await getVideoPages(client, { aid: TEST_VIDEO_AID })
+    const cid = (pages.data as { cid?: number }[])?.[0]?.cid
+    if (!cid) return
+    const res = await expectApiSuccess(() => getVideoSnapshot(client, { aid: TEST_VIDEO_AID, cid }))
+    if (!res) return
+    expect(res.code).toBe(0)
+    expect((res.data as { image?: string[] }).image).toBeDefined()
   })
 })
 
