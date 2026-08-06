@@ -73,14 +73,12 @@ function timestamp(): string {
 
 async function login(): Promise<void> {
   console.log('')
-  console.log('  ╔══════════════════════════════════════════╗')
-  console.log('  ║     Bilibili 二维码登录                   ║')
-  console.log('  ╚══════════════════════════════════════════╝')
+  console.log('Bilibili 二维码登录')
   console.log('')
 
-  // ── 1. 获取二维码 ──
+  // 1. 获取二维码
 
-  console.log(`  [${timestamp()}] 正在获取二维码...`)
+  console.log(`[${timestamp()}] 正在获取二维码...`)
 
   const generateRes = await axios.get<{
     code: number
@@ -89,25 +87,25 @@ async function login(): Promise<void> {
   }>('https://api.bilibili.com/x/passport-login/web/qrcode/generate')
 
   if (generateRes.data.code !== 0) {
-    console.error(`  ❌ 获取二维码失败: ${generateRes.data.message}`)
+    console.error(`❌ 获取二维码失败: ${generateRes.data.message}`)
     process.exit(1)
   }
 
   const { url: qrUrl, auth_code: authCode } = generateRes.data.data
 
-  // ── 2. 显示二维码 ──
+  // 2. 显示二维码
 
-  console.log(`  [${timestamp()}] 请用手机 B 站 App 扫码登录`)
+  console.log(`[${timestamp()}] 请用手机 B 站 App 扫码登录`)
   console.log('')
 
   const qrString = await QRCode.toString(qrUrl, { type: 'terminal', small: true })
   console.log(qrString)
 
   console.log('')
-  console.log('  ⏳ 等待扫码... (按 Ctrl+C 取消)')
+  console.log('⏳ 等待扫码... (按 Ctrl+C 取消)')
   console.log('')
 
-  // ── 3. 轮询扫码结果 ──
+  // 3. 轮询扫码结果
 
   let pollCount = 0
 
@@ -126,14 +124,14 @@ async function login(): Promise<void> {
         params: { auth_code: authCode },
       })
     } catch {
-      console.error(`  [${timestamp()}] ⚠️  网络错误，重试中...`)
+      console.error(`[${timestamp()}] ⚠️  网络错误，重试中...`)
       continue
     }
 
     const { code } = pollRes.data
 
     if (code === 0) {
-      // ── 4. 登录成功，提取 Cookie ──
+      // 4. 登录成功，提取 Cookie
       const headers = pollRes.headers
 
       const sessdata = extractCookie(headers, 'SESSDATA')
@@ -145,14 +143,14 @@ async function login(): Promise<void> {
       const acTimeValue = extractCookie(headers, 'ac_time_value')
 
       if (!sessdata || !biliJct || !dedeUserId) {
-        console.error('  ❌ 未能提取完整的 Cookie 凭据')
-        console.error('     原始 Set-Cookie:', JSON.stringify(headers['set-cookie']))
+        console.error('❌ 未能提取完整的 Cookie 凭据')
+        console.error('原始 Set-Cookie:', JSON.stringify(headers['set-cookie']))
         process.exit(1)
       }
 
-      console.log(`  [${timestamp()}] ✅ 登录成功！`)
+      console.log(`[${timestamp()}] ✅ 登录成功！`)
       console.log('')
-      console.log('  ┌─ 凭据 ──────────────────────────────┐')
+      console.log('凭据:')
 
       const lines = [
         `# Bilibili SDK 凭据 — 由 login.ts 自动生成 (${new Date().toISOString()})`,
@@ -170,20 +168,19 @@ async function login(): Promise<void> {
       // 打印到终端（隐藏敏感信息的部分字符）
       for (const line of lines) {
         if (line.startsWith('#') || line.startsWith('BILIBILI_DEDE_USER_ID')) {
-          console.log(`  │ ${line.padEnd(49)}│`)
+          console.log(`  ${line}`)
         } else if (line.includes('=')) {
           const [k, v] = line.split('=', 2)
           const masked =
             v.length > 8
               ? v.slice(0, 4) + '•'.repeat(Math.min(v.length - 8, 20)) + v.slice(-4)
               : '•'.repeat(v.length)
-          console.log(`  │ ${k}=${masked}`.padEnd(51) + '│')
+          console.log(`  ${k}=${masked}`)
         }
       }
-      console.log('  └──────────────────────────────────────┘')
       console.log('')
 
-      // ── 5. 可选写入 .env ──
+      // 5. 可选写入 .env
 
       if (SHOULD_WRITE) {
         // 保留 .env 中已有的非 BILIBILI_ 开头的配置
@@ -199,17 +196,14 @@ async function login(): Promise<void> {
 
         const fullContent = envContent + (existingExtra ? '\n' + existingExtra + '\n' : '')
         writeFileSync(ENV_PATH, fullContent)
-        console.log(`  ✅ 已写入 ${ENV_PATH}`)
+        console.log(`✅ 已写入 ${ENV_PATH}`)
         console.log('')
       } else {
-        console.log('  📋 复制以下内容到 .env 文件:')
+        console.log('📋 复制以下内容到 .env 文件:')
         console.log('')
-        console.log('  ── 8< ─────────────────────────────────')
         console.log(envContent.trimEnd())
-        console.log('  ── 8< ─────────────────────────────────')
         console.log('')
-        console.log(`  或使用 --write 参数自动写入:`)
-        console.log('    npx tsx scripts/login.ts --write')
+        console.log('或使用 pnpm login:write 自动写入')
         console.log('')
       }
 
@@ -217,18 +211,18 @@ async function login(): Promise<void> {
     }
 
     if (code === -2) {
-      console.error(`  [${timestamp()}] ❌ 二维码已过期，请重新运行`)
+      console.error(`[${timestamp()}] ❌ 二维码已过期，请重新运行`)
       process.exit(1)
     }
 
     // code === -1: 未扫码，继续轮询
     if (pollCount % 10 === 0) {
-      console.log(`  [${timestamp()}] ⏳ 等待扫码中... (已等待 ${String(pollCount * 1.5)}s)`)
+      console.log(`[${timestamp()}] ⏳ 等待扫码中... (已等待 ${String(pollCount * 1.5)}s)`)
     }
   }
 }
 
 login().catch((err: unknown) => {
-  console.error('  ❌ 登录失败:', err instanceof Error ? err.message : err)
+  console.error('❌ 登录失败:', err instanceof Error ? err.message : err)
   process.exit(1)
 })
