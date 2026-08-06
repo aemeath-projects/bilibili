@@ -50,7 +50,7 @@ export async function getCommentReplies(
   },
 ): Promise<BiliApiResponse> {
   return client.get(
-    '/x/v2/reply/wbi/reply',
+    '/x/v2/reply/reply',
     {
       oid: String(params.oid),
       type: String(params.type),
@@ -59,7 +59,7 @@ export async function getCommentReplies(
         offset: `{"type":2,"direction":1,"data":{"pn":${String(params.page ?? 1)}}}`,
       }),
     },
-    'wbi',
+    'cookie',
   )
 }
 

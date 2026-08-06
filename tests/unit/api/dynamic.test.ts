@@ -70,8 +70,8 @@ describe('dynamic', () => {
     it('点赞', async () => {
       await likeDynamic(mockClient, '12345')
       expect(mockPost).toHaveBeenCalledWith(
-        '/x/polymer/web-dynamic/v1/thumb/add',
-        { dynamic_id: '12345', up: '1' },
+        '/x/dynamic/feed/dyn/thumb',
+        { dyn_id_str: '12345', up: '1' },
         'cookie',
       )
     })
@@ -79,8 +79,8 @@ describe('dynamic', () => {
     it('取消点赞', async () => {
       await likeDynamic(mockClient, '12345', true)
       expect(mockPost).toHaveBeenCalledWith(
-        '/x/polymer/web-dynamic/v1/thumb/add',
-        { dynamic_id: '12345', up: '2' },
+        '/x/dynamic/feed/dyn/thumb',
+        { dyn_id_str: '12345', up: '2' },
         'cookie',
       )
     })

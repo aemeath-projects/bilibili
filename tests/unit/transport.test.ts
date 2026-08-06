@@ -98,6 +98,11 @@ describe('BiliClient', () => {
         expect((e as BiliApiError).message).toContain('权限不足')
       }
     })
+
+    it('二进制/非 JSON 响应跳过 code 校验', () => {
+      const response = { data: new Uint8Array([1, 2, 3]) }
+      expect(responseInterceptor!(response)).toBe(response)
+    })
   })
 
   describe('错误拦截器', () => {
@@ -236,6 +241,17 @@ describe('BiliClient', () => {
       })
       await client.get('/test', {}, 'none', { responseType: 'arraybuffer' })
       expect(vi.mocked(axios.get).mock.calls[0][1]?.responseType).toBe('arraybuffer')
+    })
+
+    it('getBinary 请求二进制数据', async () => {
+      vi.mocked(axios.get).mockResolvedValue({ data: new Uint8Array([1, 2, 3]) })
+      const result = await client.getBinary('/bin', {}, 'none')
+      expect(axios.get).toHaveBeenCalledWith('/bin', {
+        params: {},
+        headers: {},
+        responseType: 'arraybuffer',
+      })
+      expect(result).toEqual(new Uint8Array([1, 2, 3]))
     })
   })
 

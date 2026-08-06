@@ -18,7 +18,7 @@ describe('live', () => {
     it('传递 room_id', async () => {
       await getLiveRoomInfo(mockClient, { roomId: 12345 })
       expect(mockGet).toHaveBeenCalledWith(
-        '/xlive/web-room/v1/index/getInfoByRoom',
+        'https://api.live.bilibili.com/xlive/web-room/v1/index/getInfoByRoom',
         { room_id: '12345' },
         'cookie',
       )
@@ -29,7 +29,7 @@ describe('live', () => {
     it('必需参数 roomId', async () => {
       await getLiveStreamUrl(mockClient, { roomId: 12345 })
       expect(mockGet).toHaveBeenCalledWith(
-        '/xlive/web-room/v2/index/getRoomPlayInfo',
+        'https://api.live.bilibili.com/xlive/web-room/v2/index/getRoomPlayInfo',
         { room_id: '12345', qn: '10000', platform: 'web' },
         'cookie',
       )
@@ -38,7 +38,7 @@ describe('live', () => {
     it('自定义 qn 和 platform', async () => {
       await getLiveStreamUrl(mockClient, { roomId: 12345, qn: 4000, platform: 'h5' })
       expect(mockGet).toHaveBeenCalledWith(
-        '/xlive/web-room/v2/index/getRoomPlayInfo',
+        'https://api.live.bilibili.com/xlive/web-room/v2/index/getRoomPlayInfo',
         { room_id: '12345', qn: '4000', platform: 'h5' },
         'cookie',
       )

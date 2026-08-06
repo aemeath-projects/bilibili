@@ -5,14 +5,16 @@
 import type { BiliClient } from '../../transport'
 import type { BiliApiResponse } from '../../types'
 
-/** 获取弹幕（分段） */
+import { decodeDanmaku, type DanmakuElem } from './proto.js'
+
+/** 获取弹幕（分段，protobuf 解析） */
 export async function getDanmaku(
   client: BiliClient,
   oid: number,
   segmentIndex: number,
   pid?: number,
-): Promise<BiliApiResponse> {
-  return client.get(
+): Promise<BiliApiResponse<DanmakuElem[]>> {
+  const buffer = await client.getBinary(
     '/x/v2/dm/wbi/web/seg.so',
     {
       oid: String(oid),
@@ -22,15 +24,16 @@ export async function getDanmaku(
     },
     'wbi',
   )
+  return { code: 0, message: '0', ttl: 1, data: decodeDanmaku(buffer) }
 }
 
-/** 获取历史弹幕 */
+/** 获取历史弹幕（protobuf 解析） */
 export async function getHistoryDanmaku(
   client: BiliClient,
   oid: number,
   date: string,
-): Promise<BiliApiResponse> {
-  return client.get(
+): Promise<BiliApiResponse<DanmakuElem[]>> {
+  const buffer = await client.getBinary(
     '/x/v2/dm/web/history/seg.so',
     {
       oid: String(oid),
@@ -39,6 +42,7 @@ export async function getHistoryDanmaku(
     },
     'cookie',
   )
+  return { code: 0, message: '0', ttl: 1, data: decodeDanmaku(buffer) }
 }
 
 /** 获取弹幕配置 */
@@ -112,3 +116,5 @@ export async function likeDanmaku(
     'cookie',
   )
 }
+
+export * from './proto.js'

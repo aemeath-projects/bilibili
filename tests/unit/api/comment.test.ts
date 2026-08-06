@@ -55,13 +55,13 @@ describe('comment', () => {
     it('必需参数 oid + type + root', async () => {
       await getCommentReplies(mockClient, { oid: 123, type: 1, root: 456 })
       expect(mockGet).toHaveBeenCalledWith(
-        '/x/v2/reply/wbi/reply',
+        '/x/v2/reply/reply',
         expect.objectContaining({
           oid: '123',
           type: '1',
           root: '456',
         }),
-        'wbi',
+        'cookie',
       )
     })
   })

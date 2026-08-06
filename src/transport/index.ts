@@ -58,7 +58,12 @@ export class BiliClient {
     // 响应拦截器：统一错误处理
     this.axios.interceptors.response.use(
       (response) => {
-        const body = response.data as BiliApiResponse
+        const data = response.data as unknown
+        // 非标准 JSON 响应（如二进制 protobuf / 纯文本），跳过 code 校验直接返回
+        if (typeof data !== 'object' || data === null || !('code' in data)) {
+          return response
+        }
+        const body = data as BiliApiResponse
         if (body.code !== 0) {
           throw new BiliApiError(body.code, body.message, body)
         }
@@ -101,6 +106,25 @@ export class BiliClient {
     const response = await this.axios.get<BiliApiResponse<T>>(url, {
       params: query,
       headers: this._buildHeaders(auth),
+      ...config,
+    })
+    return response.data
+  }
+
+  /**
+   * 发起二进制 GET 请求（返回原始字节，用于 protobuf 等非 JSON 响应）
+   */
+  async getBinary(
+    url: string,
+    params: Record<string, string> = {},
+    auth: AuthMode = 'none',
+    config?: AxiosRequestConfig,
+  ): Promise<ArrayBuffer> {
+    const query = this._applyAuth(params, auth)
+    const response = await this.axios.get<ArrayBuffer>(url, {
+      params: query,
+      headers: this._buildHeaders(auth),
+      responseType: 'arraybuffer',
       ...config,
     })
     return response.data

@@ -23,5 +23,5 @@ export async function vipClockIn(client: BiliClient): Promise<BiliApiResponse> {
 
 /** 获取大会员权益 */
 export async function getVipCenter(client: BiliClient): Promise<BiliApiResponse> {
-  return client.get('/x/vip/web/center/info', {}, 'cookie')
+  return client.get('/x/vip/web/vip_center/combine', {}, 'cookie')
 }

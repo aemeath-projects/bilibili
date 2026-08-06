@@ -20,7 +20,8 @@ describe('Danmaku API — 公开数据', () => {
   it('getDanmaku 返回弹幕数据', async () => {
     const res = await expectApiSuccess(() => getDanmaku(client, 12345, 1))
     if (!res) return
-    expect(res).toBeDefined()
+    expect(res.data).toBeDefined()
+    expect(Array.isArray(res.data)).toBe(true)
   })
 
   it('getDanmakuView 返回弹幕配置', async () => {

@@ -25,18 +25,22 @@ describe('login / web', () => {
   })
 
   describe('getQrCodeUrl', () => {
-    it('无参数 GET', async () => {
+    it('无参数 GET 使用 passport 域名', async () => {
       await getQrCodeUrl(mockClient)
-      expect(mockGet).toHaveBeenCalledWith('/x/passport-login/web/qrcode/generate', {}, 'none')
+      expect(mockGet).toHaveBeenCalledWith(
+        'https://passport.bilibili.com/x/passport-login/web/qrcode/generate',
+        {},
+        'none',
+      )
     })
   })
 
   describe('pollQrCode', () => {
-    it('传递 auth_code', async () => {
+    it('传递 qrcode_key', async () => {
       await pollQrCode(mockClient, 'abc123')
       expect(mockGet).toHaveBeenCalledWith(
-        '/x/passport-login/web/qrcode/poll',
-        { auth_code: 'abc123' },
+        'https://passport.bilibili.com/x/passport-login/web/qrcode/poll',
+        { qrcode_key: 'abc123' },
         'none',
       )
     })
@@ -50,11 +54,11 @@ describe('login / web', () => {
   })
 
   describe('refreshCookie', () => {
-    it('传递 refresh_token', async () => {
+    it('POST 刷新 cookie', async () => {
       await refreshCookie(mockClient, 'refresh123')
-      expect(mockGet).toHaveBeenCalledWith(
-        '/x/passport-login/web/cookie/info',
-        { refresh_token: 'refresh123' },
+      expect(mockPost).toHaveBeenCalledWith(
+        'https://passport.bilibili.com/x/passport-login/web/cookie/refresh',
+        { csrf: '', refresh_token: 'refresh123' },
         'cookie',
       )
     })
@@ -63,7 +67,11 @@ describe('login / web', () => {
   describe('logout', () => {
     it('POST 请求', async () => {
       await logout(mockClient)
-      expect(mockPost).toHaveBeenCalledWith('/x/passport-login/web/logout', {}, 'cookie')
+      expect(mockPost).toHaveBeenCalledWith(
+        'https://passport.bilibili.com/x/passport-login/web/logout',
+        { csrf: '' },
+        'cookie',
+      )
     })
   })
 })

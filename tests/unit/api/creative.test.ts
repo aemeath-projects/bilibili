@@ -22,7 +22,11 @@ describe('creative', () => {
   describe('getCreativeCompare', () => {
     it('GET cookie 鉴权', async () => {
       await getCreativeCompare(mockClient)
-      expect(mockGet).toHaveBeenCalledWith('/x/web/data/v2/overview/compare', {}, 'cookie')
+      expect(mockGet).toHaveBeenCalledWith(
+        'https://member.bilibili.com/x/web/data/v2/overview/compare',
+        {},
+        'cookie',
+      )
     })
   })
 
@@ -30,7 +34,7 @@ describe('creative', () => {
     it('传递 period 和 type', async () => {
       await getCreativeGraph(mockClient, 7, 'play')
       expect(mockGet).toHaveBeenCalledWith(
-        '/x/web/data/v2/overview/stat/graph',
+        'https://member.bilibili.com/x/web/data/v2/overview/stat/graph',
         { period: '7', s_locale: 'zh_CN', type: 'play' },
         'cookie',
       )
@@ -41,7 +45,7 @@ describe('creative', () => {
     it('传递 period', async () => {
       await getCreativeNum(mockClient, 30)
       expect(mockGet).toHaveBeenCalledWith(
-        '/x/web/data/v2/overview/stat/num',
+        'https://member.bilibili.com/x/web/data/v2/overview/stat/num',
         { period: '30', s_locale: 'zh_CN' },
         'cookie',
       )
@@ -52,7 +56,7 @@ describe('creative', () => {
     it('传递 period', async () => {
       await getCreativeFanOverview(mockClient, 7)
       expect(mockGet).toHaveBeenCalledWith(
-        '/x/web/data/v2/fans/stat/num',
+        'https://member.bilibili.com/x/web/data/v2/fans/stat/num',
         { period: '7' },
         'cookie',
       )

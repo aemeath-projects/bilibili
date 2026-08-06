@@ -36,7 +36,7 @@ describe('vip', () => {
   describe('getVipCenter', () => {
     it('GET cookie 鉴权', async () => {
       await getVipCenter(mockClient)
-      expect(mockGet).toHaveBeenCalledWith('/x/vip/web/center/info', {}, 'cookie')
+      expect(mockGet).toHaveBeenCalledWith('/x/vip/web/vip_center/combine', {}, 'cookie')
     })
   })
 })

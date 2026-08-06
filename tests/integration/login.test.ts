@@ -61,18 +61,18 @@ describeIf('BILIBILI_ACCESS_TOKEN')('Login TV API', () => {
 })
 
 describe('Login API — 公开端点', () => {
-  it('getQrCodeUrl 返回二维码 URL', async () => {
+  it('getQrCodeUrl 返回二维码 URL 和 qrcode_key', async () => {
     const res = await expectApiSuccess(() => getQrCodeUrl(client))
     if (!res) return
     expect(res.code).toBe(0)
     expect(res.data.url).toMatch(/^https?:\/\//)
-    expect(res.data.auth_code).toBeTruthy()
+    expect(res.data.qrcode_key).toBeTruthy()
   })
 
-  it('pollQrCode 返回轮询结果（预期未扫码）', async () => {
-    const res = await expectApiSuccess(() => pollQrCode(client, 'test-auth-code'))
+  it('pollQrCode 返回轮询结果（预期未扫码或已失效）', async () => {
+    const res = await expectApiSuccess(() => pollQrCode(client, 'test-qrcode-key'))
     if (!res) return
-    // 未扫码时 code 应为非 0（如 -400 或类似），但不应抛异常
-    expect(res).toBeDefined()
+    // 无效 key 返回 data.code 状态码：86101 未扫码 / 86038 已失效，不应为 0
+    expect([86038, 86101]).toContain(res.data.code)
   })
 })

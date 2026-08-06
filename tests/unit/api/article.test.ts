@@ -25,7 +25,7 @@ describe('article', () => {
     it('必需参数 mid', async () => {
       await getArticlesByUser(mockClient, { mid: 123456 })
       expect(mockGet).toHaveBeenCalledWith(
-        '/x/space/wbi/article/list',
+        '/x/space/wbi/article',
         { mid: '123456', pn: '1', ps: '12' },
         'wbi',
       )
@@ -34,7 +34,7 @@ describe('article', () => {
     it('自定义分页', async () => {
       await getArticlesByUser(mockClient, { mid: 123456, page: 3, pageSize: 20 })
       expect(mockGet).toHaveBeenCalledWith(
-        '/x/space/wbi/article/list',
+        '/x/space/wbi/article',
         { mid: '123456', pn: '3', ps: '20' },
         'wbi',
       )

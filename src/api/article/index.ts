@@ -21,7 +21,7 @@ export async function getArticlesByUser(
   params: { mid: number; page?: number; pageSize?: number },
 ): Promise<BiliApiResponse> {
   return client.get(
-    '/x/space/wbi/article/list',
+    '/x/space/wbi/article',
     {
       mid: String(params.mid),
       pn: String(params.page ?? 1),

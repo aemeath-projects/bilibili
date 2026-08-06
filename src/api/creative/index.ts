@@ -7,7 +7,7 @@ import type { BiliApiResponse } from '../../types'
 
 /** 获取对比数据 */
 export async function getCreativeCompare(client: BiliClient): Promise<BiliApiResponse> {
-  return client.get('/x/web/data/v2/overview/compare', {}, 'cookie')
+  return client.get('https://member.bilibili.com/x/web/data/v2/overview/compare', {}, 'cookie')
 }
 
 /** 获取统计图表数据 */
@@ -17,7 +17,7 @@ export async function getCreativeGraph(
   type: string,
 ): Promise<BiliApiResponse> {
   return client.get(
-    '/x/web/data/v2/overview/stat/graph',
+    'https://member.bilibili.com/x/web/data/v2/overview/stat/graph',
     {
       period: String(period),
       s_locale: 'zh_CN',
@@ -30,7 +30,7 @@ export async function getCreativeGraph(
 /** 获取统计数据 */
 export async function getCreativeNum(client: BiliClient, period: number): Promise<BiliApiResponse> {
   return client.get(
-    '/x/web/data/v2/overview/stat/num',
+    'https://member.bilibili.com/x/web/data/v2/overview/stat/num',
     {
       period: String(period),
       s_locale: 'zh_CN',
@@ -45,7 +45,7 @@ export async function getCreativeFanOverview(
   period: number,
 ): Promise<BiliApiResponse> {
   return client.get(
-    '/x/web/data/v2/fans/stat/num',
+    'https://member.bilibili.com/x/web/data/v2/fans/stat/num',
     {
       period: String(period),
     },

@@ -23,7 +23,7 @@ export async function getLiveRoomInfo(
   params: LiveRoomParam,
 ): Promise<BiliApiResponse> {
   return client.get(
-    '/xlive/web-room/v1/index/getInfoByRoom',
+    'https://api.live.bilibili.com/xlive/web-room/v1/index/getInfoByRoom',
     { room_id: String(params.roomId) },
     'cookie',
   )
@@ -35,7 +35,7 @@ export async function getLiveStreamUrl(
   params: LiveRoomParam & { qn?: number; platform?: string },
 ): Promise<BiliApiResponse> {
   return client.get(
-    '/xlive/web-room/v2/index/getRoomPlayInfo',
+    'https://api.live.bilibili.com/xlive/web-room/v2/index/getRoomPlayInfo',
     {
       room_id: String(params.roomId),
       qn: String(params.qn ?? 10000),

@@ -12,9 +12,9 @@ export async function likeDynamic(
   unlike = false,
 ): Promise<BiliApiResponse> {
   return client.post(
-    '/x/polymer/web-dynamic/v1/thumb/add',
+    '/x/dynamic/feed/dyn/thumb',
     {
-      dynamic_id: dynamicId,
+      dyn_id_str: dynamicId,
       up: unlike ? '2' : '1',
     },
     'cookie',

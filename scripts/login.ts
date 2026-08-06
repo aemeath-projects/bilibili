@@ -47,6 +47,33 @@ Bilibili QR 码登录脚本
 
 const SHOULD_WRITE = process.argv.includes('--write')
 
+// Bilibili API 响应类型（扫码登录专用）
+
+interface BiliApiResponse<T = unknown> {
+  code: number
+  message: string
+  data: T
+}
+
+interface QrCodeGenerateData {
+  url: string
+  qrcode_key: string
+}
+
+interface QrCodePollData {
+  url: string
+  refresh_token: string
+  timestamp: number
+  /** 扫码状态码：0 成功 / 86101 未扫码 / 86090 已扫码未确认 / 86038 已失效 */
+  code: number
+  message: string
+}
+
+// 轮询状态码常量
+const QR_CODE_WAITING = 86101
+const QR_CODE_SCANNED = 86090
+const QR_CODE_EXPIRED = 86038
+
 // 工具
 
 const sleep = (ms: number) => new Promise((r) => setTimeout(r, ms))
@@ -80,18 +107,16 @@ async function login(): Promise<void> {
 
   console.log(`[${timestamp()}] 正在获取二维码...`)
 
-  const generateRes = await axios.get<{
-    code: number
-    message: string
-    data: { url: string; auth_code: string }
-  }>('https://api.bilibili.com/x/passport-login/web/qrcode/generate')
+  const generateRes = await axios.get<BiliApiResponse<QrCodeGenerateData>>(
+    'https://passport.bilibili.com/x/passport-login/web/qrcode/generate',
+  )
 
   if (generateRes.data.code !== 0) {
     console.error(`❌ 获取二维码失败: ${generateRes.data.message}`)
     process.exit(1)
   }
 
-  const { url: qrUrl, auth_code: authCode } = generateRes.data.data
+  const { url: qrUrl, qrcode_key: qrCodeKey } = generateRes.data.data
 
   // 2. 显示二维码
 
@@ -113,24 +138,22 @@ async function login(): Promise<void> {
     await sleep(1500)
     pollCount++
 
-    let pollRes: AxiosResponse<{
-      code: number
-      message: string
-      data?: { url?: string }
-    }>
+    let pollRes: AxiosResponse<BiliApiResponse<QrCodePollData>>
 
     try {
-      pollRes = await axios.get('https://api.bilibili.com/x/passport-login/web/qrcode/poll', {
-        params: { auth_code: authCode },
-      })
+      pollRes = await axios.get<BiliApiResponse<QrCodePollData>>(
+        'https://passport.bilibili.com/x/passport-login/web/qrcode/poll',
+        { params: { qrcode_key: qrCodeKey } },
+      )
     } catch {
       console.error(`[${timestamp()}] ⚠️  网络错误，重试中...`)
       continue
     }
 
-    const { code } = pollRes.data
+    // 新版响应：顶层 code 恒为 0（请求成功），实际扫码状态码嵌套在 data.code
+    const scanCode = pollRes.data.data.code
 
-    if (code === 0) {
+    if (scanCode === 0) {
       // 4. 登录成功，提取 Cookie
       const headers = pollRes.headers
 
@@ -139,7 +162,9 @@ async function login(): Promise<void> {
       const dedeUserId = extractCookie(headers, 'DedeUserID')
       const buvid3 = extractCookie(headers, 'buvid3')
       const buvid4 = extractCookie(headers, 'buvid4')
-      const refreshToken = extractCookie(headers, 'refresh_token')
+      // 新版 refresh_token 返回在响应体 data 中，而非 Set-Cookie（保留后者作兜底）
+      const refreshToken =
+        pollRes.data.data.refresh_token || extractCookie(headers, 'refresh_token')
       const acTimeValue = extractCookie(headers, 'ac_time_value')
 
       if (!sessdata || !biliJct || !dedeUserId) {
@@ -210,13 +235,21 @@ async function login(): Promise<void> {
       break
     }
 
-    if (code === -2) {
+    if (scanCode === QR_CODE_EXPIRED) {
       console.error(`[${timestamp()}] ❌ 二维码已过期，请重新运行`)
       process.exit(1)
     }
 
-    // code === -1: 未扫码，继续轮询
-    if (pollCount % 10 === 0) {
+    // 已扫码未确认
+    if (scanCode === QR_CODE_SCANNED) {
+      if (pollCount % 5 === 0) {
+        console.log(`[${timestamp()}] 📱 已扫码，请在手机上确认登录`)
+      }
+      continue
+    }
+
+    // scanCode === QR_CODE_WAITING (86101): 未扫码，继续轮询
+    if (scanCode === QR_CODE_WAITING && pollCount % 10 === 0) {
       console.log(`[${timestamp()}] ⏳ 等待扫码中... (已等待 ${String(pollCount * 1.5)}s)`)
     }
   }

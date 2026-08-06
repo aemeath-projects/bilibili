@@ -1,11 +1,10 @@
 import eslint from '@eslint/js'
+import { defineConfig } from 'eslint/config'
 import prettier from 'eslint-config-prettier'
 import importPlugin from 'eslint-plugin-import-x'
 import tseslint from 'typescript-eslint'
 
-// tseslint.config 在类型层面标记为 deprecated（建议改 defineConfig），但当前版本无此导出，忽略该警告
-// eslint-disable-next-line @typescript-eslint/no-deprecated
-export default tseslint.config(
+export default defineConfig(
   { ignores: ['dist/', 'node_modules/', '**/*.js', '**/*.cjs', '**/*.mjs'] },
   eslint.configs.recommended,
   ...tseslint.configs.strictTypeChecked,
