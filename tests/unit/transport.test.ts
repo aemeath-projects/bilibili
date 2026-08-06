@@ -1,7 +1,7 @@
 import axios from 'axios'
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
 
-import { Credential, BiliApiError } from '../../src/core'
+import { Credential, BiliApiError, WbiSigner } from '../../src/core'
 import { BiliClient, createClient } from '../../src/transport'
 
 // Mock axios
@@ -200,6 +200,31 @@ describe('BiliClient', () => {
       await client.get('/test', {}, 'none')
       const params = vi.mocked(axios.get).mock.calls[0][1]?.params as Record<string, string>
       expect(params.access_key).toBe('tok123')
+    })
+
+    it('GET 请求注入 wbi 签名', async () => {
+      const signer = new WbiSigner()
+      signer.init('7cd084941338484aae1ad9425b84077c', '4932caff0ff746eab6f01bf08b70ac45')
+      client = new BiliClient({ wbiSigner: signer })
+      vi.mocked(axios.get).mockResolvedValue({
+        data: { code: 0, message: '0', ttl: 1, data: 'ok' },
+      })
+      await client.get('/test', { a: '1' }, 'wbi')
+      const params = vi.mocked(axios.get).mock.calls[0][1]?.params as Record<string, string>
+      expect(params.w_rid).toHaveLength(32)
+      expect(params.wts).toBeTruthy()
+      expect(params.a).toBe('1')
+    })
+
+    it('wbi 签名器未就绪时不注入 wbi 参数', async () => {
+      client = new BiliClient({ wbiSigner: new WbiSigner() })
+      vi.mocked(axios.get).mockResolvedValue({
+        data: { code: 0, message: '0', ttl: 1, data: 'ok' },
+      })
+      await client.get('/test', { a: '1' }, 'wbi')
+      const params = vi.mocked(axios.get).mock.calls[0][1]?.params as Record<string, string>
+      expect(params.w_rid).toBeUndefined()
+      expect(params.a).toBe('1')
     })
 
     it('GET 请求带 cookie header', async () => {

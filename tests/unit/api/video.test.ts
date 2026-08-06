@@ -182,6 +182,15 @@ describe('video / action', () => {
         'cookie',
       )
     })
+
+    it('使用 bvid 投币', async () => {
+      await coinVideo(mockClient, { bvid: 'BV1xx' })
+      expect(mockPost).toHaveBeenCalledWith(
+        '/x/web-interface/coin/add',
+        { aid: '', bvid: 'BV1xx', multiply: '1', select_like: '0' },
+        'cookie',
+      )
+    })
   })
 
   describe('tripleVideo', () => {
@@ -190,6 +199,15 @@ describe('video / action', () => {
       expect(mockPost).toHaveBeenCalledWith(
         '/x/web-interface/archive/like/triple',
         { aid: '170001', bvid: '' },
+        'cookie',
+      )
+    })
+
+    it('使用 bvid 三连', async () => {
+      await tripleVideo(mockClient, { bvid: 'BV1xx' })
+      expect(mockPost).toHaveBeenCalledWith(
+        '/x/web-interface/archive/like/triple',
+        { aid: '', bvid: 'BV1xx' },
         'cookie',
       )
     })

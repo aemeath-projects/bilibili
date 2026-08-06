@@ -133,6 +133,12 @@ describe('parseCookie', () => {
     expect(result.a).toBe('1')
     expect(result.b).toBe('2')
   })
+
+  it('忽略等号前为空的键', () => {
+    const result = parseCookie('a=1; =value')
+    expect(result.a).toBe('1')
+    expect(result['']).toBeUndefined()
+  })
 })
 
 // 重导出的哈希函数

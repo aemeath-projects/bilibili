@@ -1,6 +1,8 @@
 /**
  * Danmaku API 单元测试
  */
+import { gzipSync } from 'node:zlib'
+
 import protobuf from 'protobufjs'
 import { describe, expect, it, vi, afterEach } from 'vitest'
 
@@ -182,6 +184,45 @@ message DmSegMobileReply {
       expect(elems[0].progress).toBe(1000)
       expect(elems[0].content).toBe('测试弹幕')
       expect(elems[0].color).toBe(16777215)
+    })
+
+    it('解码 gzip 压缩的弹幕 protobuf', () => {
+      const root = protobuf.parse(ENCODE_PROTO).root
+      const type = root.lookupType('DmSegMobileReply')
+      const payload = type.create({
+        elems: [{ id: 456, progress: 2000, content: 'gzip弹幕', mode: 1 }],
+      })
+      const bytes = type.encode(payload).finish()
+      const elems = decodeDanmaku(gzipSync(bytes))
+      expect(elems).toHaveLength(1)
+      expect(elems[0].id).toBe(456)
+      expect(elems[0].progress).toBe(2000)
+      expect(elems[0].content).toBe('gzip弹幕')
+      expect(elems[0].mode).toBe(1)
+    })
+
+    it('接受 ArrayBuffer 输入', () => {
+      const root = protobuf.parse(ENCODE_PROTO).root
+      const type = root.lookupType('DmSegMobileReply')
+      const payload = type.create({
+        elems: [{ id: 789, progress: 3000, content: 'arraybuffer' }],
+      })
+      const bytes = type.encode(payload).finish()
+      const arrayBuffer = bytes.buffer.slice(
+        bytes.byteOffset,
+        bytes.byteOffset + bytes.byteLength,
+      ) as ArrayBuffer
+      const elems = decodeDanmaku(arrayBuffer)
+      expect(elems).toHaveLength(1)
+      expect(elems[0].id).toBe(789)
+      expect(elems[0].content).toBe('arraybuffer')
+    })
+
+    it('缺少 elems 字段时返回空数组', () => {
+      const root = protobuf.parse(ENCODE_PROTO).root
+      const type = root.lookupType('DmSegMobileReply')
+      const bytes = type.encode(type.create({})).finish()
+      expect(decodeDanmaku(bytes)).toEqual([])
     })
 
     it('空数据返回空数组', () => {
