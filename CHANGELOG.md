@@ -2,6 +2,15 @@
 
 所有版本变更记录
 
+## [1.0.1](https://github.com/aemeath-projects/bilibili/compare/v1.0.0...v1.0.1) (2026-08-06)
+
+### Bug 修复
+
+* 修复登录与多接口端点，支持弹幕 protobuf 解析 ([e558030](https://github.com/aemeath-projects/bilibili/commit/e558030abcdf6133bcb5481397769fbfe1eed1b9))
+
+### ♻重构
+
+* 精简 login 脚本终端输出格式 ([d2486de](https://github.com/aemeath-projects/bilibili/commit/d2486de0a2d1ea56ceec64b57fe241646a7512af))
 ## 1.0.0 (2026-06-15)
 
 
